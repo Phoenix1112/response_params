@@ -11,8 +11,11 @@ pip3 install colorama
 # usage
 
 ```
+# single url
+python3 ValueFinder.py --url https://www.google.com
 
-python3 
 
+# multi url
+python3 ValueFinder.py --list /path/urls.txt --thread 20 --output /path/results.txt
 
 ```
