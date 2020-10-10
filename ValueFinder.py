@@ -86,7 +86,6 @@ if __name__ == "__main__":
 	args = ap.parse_args()
 
 	total = []
-	found_params = []
 	print_lock = threading.Lock()
 
 	if args.list and not args.url:
