@@ -22,19 +22,35 @@ def req(url):
 		reg2 = re.findall('id=\"(.+?)\"',response.text)
 
 		reg_document = []
+		blacklist= ["?","*","<",">","#","!",";",":","<\\","</","/>"]
+
 		r3 = re.findall("""(document\.[a-zA-Z0-9._-]+\(\".+?\"\)|document\.[a-zA-Z0-9._-]+\(\'.+?\'\))""",response.text)
+
 
 		if r3:
 
 			for i in r3:
+
 				if '"' in i:
+
 					i = i.split('"')
-					reg_document.append(i[-2])
+
+					if not i[-2] in blacklist:
+
+
+						reg_document.append(i[-2])
 				elif "'" in i:
+
 					i = i.split("'")
-					reg_document.append(i[-2])
+
+					if not i[-2] in blacklist:
+
+
+						reg_document.append(i[-2])
+
 				else:
 					pass
+
 
 		reg3 = list(set(reg1 + reg2 + reg_document))
 
@@ -58,7 +74,7 @@ def req(url):
 
 			for i in reg3:
 
-				i = i.replace("'","").replace('"','')
+				i = i.replace("'","").replace('"','').replace(" +","").replace("+ ","").replace(" +","").replace(" ","")
 
 				with print_lock:
 					print(Fore.GREEN + f"{i}")
