@@ -20,8 +20,20 @@ def req(url):
 		reg1 = re.findall('name=\"(.+?)\"',response.text)
 
 		reg2 = re.findall('id=\"(.+?)\"',response.text)
+		
+		reg_document = []
+		
+		r3 = re.findall('document\.[a-zA-Z0-9._-]+\(\".+?\"\)',response.text)
+		
+		if r3:
 
-		reg3 = list(set(reg1 + reg2))
+			for i in r3:
+				i = i.split('"')
+				reg_document.append(i[-2])
+
+		reg3 = list(set(reg1 + reg2 + reg_document))
+
+		del reg1,reg2,r3
 
 		if len(reg3) > 0:
 
